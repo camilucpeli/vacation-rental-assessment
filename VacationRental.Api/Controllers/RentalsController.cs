@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using VacationRental.Api.Models;
+using VacationRental.Business.Services;
 
 namespace VacationRental.Api.Controllers
 {
@@ -9,6 +10,7 @@ namespace VacationRental.Api.Controllers
     [ApiController]
     public class RentalsController : ControllerBase
     {
+        private RentalsService _rentalsService;
         private readonly IDictionary<int, RentalViewModel> _rentals;
 
         public RentalsController(IDictionary<int, RentalViewModel> rentals)
@@ -29,6 +31,7 @@ namespace VacationRental.Api.Controllers
         [HttpPost]
         public ResourceIdViewModel Post(RentalBindingModel model)
         {
+
             var key = new ResourceIdViewModel { Id = _rentals.Keys.Count + 1 };
 
             _rentals.Add(key.Id, new RentalViewModel
